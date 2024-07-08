@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Captioning App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+		body {
+			background-image: url(https://www.gstatic.com/alkali/e6f43df19a7e3578f7404ef7b2f0536bad53a348.png);
+			background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+		}
+		.container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+        }
+		h1 {
+            text-align: center;
+        }
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h1 class="text-center">Image Caption Generator</h1>
+				<!-- Login form -->
+				<form method="POST" id="login-form">
+					<div class="form-group">
+						<label for="first_name">First Name:</label>
+						<input type="text" class="form-control" id="first_name" name="first_name" required>
+					</div>
+					<div class="form-group">
+						<label for="last_name">Last Name:</label>
+						<input type="text" class="form-control" id="last_name" name="last_name" required>
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input type="email" class="form-control" id="email" name="email" required>
+					</div>
+					<button type="button" class="btn btn-primary center-block" id="login-btn">Next</button>
+				</form>
+				<form method="POST" enctype="multipart/form-data" id="image-form" class="hidden">
+					<div class="form-group">
+						<label for="image">Input Image:</label>
+						<input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+					</div>
+					<input type="hidden" id="first_name_hidden" name="first_name_hidden" value="">
+					<input type="hidden" id="last_name_hidden" name="last_name_hidden" value="">
+					<input type="hidden" id="email_hidden" name="email_hidden" value="">
+					<button type="submit" class="btn btn-primary center-block">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			    $("#image-form").addClass("hidden");
+			    $("#login-btn").click(function() {
+				var first_name = $("#first_name").val();
+                var last_name = $("#last_name").val();
+                var email = $("#email").val();
+            	$("#first_name_hidden").val(first_name);
+            	$("#last_name_hidden").val(last_name);
+            	$("#email_hidden").val(email);
+				$("#login-form").addClass("hidden");
+				$("#image-form").removeClass("hidden");
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Captioning Result</title>
+	<!-- Add Bootstrap CSS link -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- Add custom CSS for background image -->
+	<style>
+		body {
+			background-image: url(https://www.gstatic.com/alkali/e6f43df19a7e3578f7404ef7b2f0536bad53a348.png);
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+			text-align: center;
+			padding-top: 50px;
+		}
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 5px;
+  }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Image Caption:</h1>
+		<p>{{ caption }}</p>
+		<!-- Feedback form -->
+		<form method="POST" id="feedback-form">
+			<div class="form-group">
+				<label for="feedback">Feedback:</label>
+				<textarea class="form-control" id="feedback" name="feedback" rows="3" required></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit Feedback</button>
+		</form>
+		<!-- Confirmation message -->
+		<div class="alert alert-success hidden" id="confirmation-message">
+			Thank you for your feedback!
+		</div>
+	</div>
+
+	<!-- Add Bootstrap JS link -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- Add jQuery JS link -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			// Submit feedback form using AJAX
+			$("#feedback-form").submit(function(event) {
+				event.preventDefault();
+				$.ajax({
+					type: "POST",
+					url: "/submit_feedback",
+					data: $(this).serialize(),
+					success: function() {
+						$("#feedback-form").addClass("hidden");
+						$("#confirmation-message").removeClass("hidden");
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
+
